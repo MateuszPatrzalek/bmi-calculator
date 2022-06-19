@@ -4,7 +4,16 @@ import 'reusable_card.dart';
 import 'bottom_button.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+  ResultsPage(
+      {required this.bmiResult,
+      required this.interpretation,
+      required this.resultText,
+      required this.textColor});
+
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +44,19 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Normal',
-                    style: kResultTextColor,
+                    resultText.toUpperCase(),
+                    style: TextStyle(
+                        color: textColor,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '18.3',
+                    bmiResult,
                     style: kBMITextStyle,
                   ),
                   Text(
-                    'Your BMI results is quite low.',
+                    interpretation,
+                    textAlign: TextAlign.center,
                     style: kBodyTextStyle,
                   ),
                 ],
@@ -51,9 +64,11 @@ class ResultsPage extends StatelessWidget {
               onPress: () {},
             ),
           ),
-          BottomButton(onTap: (){
-            Navigator.pop(context);
-          }, buttonTitle: 'RE-CALCULATE')
+          BottomButton(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              buttonTitle: 'RE-CALCULATE')
         ],
       ),
     );
